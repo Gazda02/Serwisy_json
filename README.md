@@ -31,6 +31,6 @@ Requests 2.32.2;
 psutil 5.9.8;
 
 Docker 26.1.4;
-Docker Compose v2.27.1;
+Docker Compose 2.27.1;
 
 
