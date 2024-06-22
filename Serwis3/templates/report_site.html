@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Performance Data</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h1>Performance Data for Service1 and Service2</h1>
+    <h2>Service1</h2>
+    <canvas id="performanceChartService1" width="400" height="200"></canvas>
+    <h3>Answer Time Data</h3>
+    <table id="answerTimeTableService1" border="1">
+        <thead>
+            <tr>
+                <th>Request Number</th>
+                <th>Request Size</th>
+                <th>Answer Time</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    <h2>Service2</h2>
+    <canvas id="performanceChartService2" width="400" height="200"></canvas>
+    <h3>Answer Time Data</h3>
+    <table id="answerTimeTableService2" border="1">
+        <thead>
+            <tr>
+                <th>Request Number</th>
+                <th>Request Size</th>
+                <th>Answer Time</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    <script>
+        async function fetchData() {
+            const response = await fetch('/data');
+            const data = await response.json();
+            return data;
+        }
+
+        function createLineChart(ctx, labels, cpuData, memoryData) {
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'CPU Usage',
+                            data: cpuData,
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            borderWidth: 1,
+                            fill: false
+                        },
+                        {
+                            label: 'Memory Usage',
+                            data: memoryData,
+                            borderColor: 'rgba(153, 102, 255, 1)',
+                            borderWidth: 1,
+                            fill: false
+                        }
+                    ]
+                },
+                options: {
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Time'
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'percent'
+                            },
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+
+        function populateTable(tableId, data) {
+            const tableBody = document.getElementById(tableId).getElementsByTagName('tbody')[0];
+            tableBody.innerHTML = '';
+            for (const key in data) {
+                const row = document.createElement('tr');
+                const cellKey = document.createElement('td');
+                const cellReqSize = document.createElement('td');
+                const cellAnsTime = document.createElement('td');
+
+                cellKey.textContent = key;
+                cellReqSize.textContent = data[key].req_size;
+                cellAnsTime.textContent = data[key].ans_time;
+
+                row.appendChild(cellKey);
+                row.appendChild(cellReqSize);
+                row.appendChild(cellAnsTime);
+                tableBody.appendChild(row);
+            }
+        }
+
+        async function renderCharts() {
+            const rawData = await fetchData();
+
+            const service1 = rawData.service1;
+            const service2 = rawData.service2;
+
+            const labels1 = Object.keys(service1.cpu);
+            const cpuData1 = Object.values(service1.cpu);
+            const memoryData1 = Object.values(service1.memory);
+
+            const labels2 = Object.keys(service2.cpu);
+            const cpuData2 = Object.values(service2.cpu);
+            const memoryData2 = Object.values(service2.memory);
+
+            createLineChart(document.getElementById('performanceChartService1').getContext('2d'), labels1, cpuData1, memoryData1);
+            createLineChart(document.getElementById('performanceChartService2').getContext('2d'), labels2, cpuData2, memoryData2);
+
+            populateTable('answerTimeTableService1', service1.answer_time);
+            populateTable('answerTimeTableService2', service2.answer_time);
+        }
+
+        renderCharts();
+    </script>
+</body>
+</html>
