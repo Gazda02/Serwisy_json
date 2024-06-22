@@ -24,8 +24,11 @@ Raport na 1k,10k,100k wygenerowanych jsonow.
 
 >>> Technologie
 
-Python 3.10.5
-Docker 26.1.4
-Docker Compose v2.27.1
-Flask 3.0.3
+Python 3.10.5\n
+Docker 26.1.4\n
+Docker Compose v2.27.1\n
+Flask 3.0.3\n
+Flask-CSV 1.2.1\n
+Requests 2.32.2\n
+psutil 5.9.8
 
