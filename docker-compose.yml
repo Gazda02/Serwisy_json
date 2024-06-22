@@ -1,0 +1,33 @@
+version: '2.7'
+services:
+  serwis1:
+    build: ./Serwis1
+    networks:
+      services-network:
+        ipv4_address: 172.20.0.2
+    ports:
+      - "5001:5000"
+
+  serwis2:
+    build: ./Serwis2
+    networks:
+      services-network:
+        ipv4_address: 172.20.0.3
+    ports:
+      - "5002:5000"
+
+  serwis3:
+    build: ./Serwis3
+    networks:
+      services-network:
+        ipv4_address: 172.20.0.4
+    ports:
+      - "5003:5000"
+
+
+networks:
+  services-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
