@@ -1,4 +1,4 @@
-flask
-flask_csv
-requests
-psutil
+flask==3.0.3
+flask_csv==1.2.1
+requests==2.32.2
+psutil==5.9.8
