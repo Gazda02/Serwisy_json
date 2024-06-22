@@ -22,7 +22,7 @@ def random_name(_len: int) -> str:
 
 def rand_jsons(size: int) -> list[dict]:
     """
-    Generuje liste słowników o losowych wartościach i określonych kluchach
+    Generuje liste słowników o losowych wartościach i określonych kluczach
 
     Parameters
     ----------
