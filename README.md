@@ -1,4 +1,5 @@
 >>> Polecenie
+
 Trzy serwisy.
 
 1. Serwis który zwraca pod adresem ‘/generate/json/{size}’ listę jsonow o wskazanym rozmiarze
@@ -22,5 +23,9 @@ poprzednich serwisów oraz czas zapytań http pomiędzy serwisami 3->2->1.
 Raport na 1k,10k,100k wygenerowanych jsonow.
 
 >>> Technologie
-Python 3.10
-Docker
+
+Python 3.10.5
+Docker 26.1.4
+Docker Compose v2.27.1
+Flask 3.0.3
+
