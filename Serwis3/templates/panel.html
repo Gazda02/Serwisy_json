@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Service Interface</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        #basicButton {
+            font-size: 24px;
+            padding: 10px 20px;
+            margin-bottom: 20px;
+        }
+        #checkboxField {
+            display: flex;
+            flex-direction: column;
+        }
+        #checkboxField label {
+            margin: 5px 0;
+        }
+        #textField {
+            margin-bottom: 20px;
+        }
+        #textInput {
+            width: 100%;
+            height: 100px;
+        }
+        #textButton {
+            display: block;
+            margin-top: 10px;
+        }
+        .container {
+            display: flex;
+            justify-content: space-between;
+        }
+        .column {
+            flex: 1;
+            margin: 10px;
+        }
+        #newField {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Service Interface</h1>
+    <div id="newField">
+        <label for="sizeInput">Size: </label>
+        <input type="number" id="sizeInput" name="sizeInput">
+        <button id="newButton">New</button>
+    </div>
+    <div id="responseField" style="border: 1px solid black; height: 200px; overflow-y: scroll; margin-bottom: 20px;">
+        <p>Response will be displayed here...</p>
+    </div>
+    <div class="container">
+        <div id="basicField" class="column">
+            <button id="basicButton">Basic</button>
+        </div>
+        <div id="checkboxField" class="column">
+            <label><input type="checkbox" name="field" value="_type"> _type</label>
+            <label><input type="checkbox" name="field" value="_id"> _id</label>
+            <label><input type="checkbox" name="field" value="key"> key</label>
+            <label><input type="checkbox" name="field" value="name"> name</label>
+            <label><input type="checkbox" name="field" value="fullName"> fullName</label>
+            <label><input type="checkbox" name="field" value="iata_airport_code"> iata_airport_code</label>
+            <label><input type="checkbox" name="field" value="type"> type</label>
+            <label><input type="checkbox" name="field" value="country"> country</label>
+            <label><input type="checkbox" name="field" value="latitude"> latitude</label>
+            <label><input type="checkbox" name="field" value="longitude"> longitude</label>
+            <label><input type="checkbox" name="field" value="location_id"> location_id</label>
+            <label><input type="checkbox" name="field" value="inEurope"> inEurope</label>
+            <label><input type="checkbox" name="field" value="countryCode"> countryCode</label>
+            <label><input type="checkbox" name="field" value="coreCountry"> coreCountry</label>
+            <label><input type="checkbox" name="field" value="distance"> distance</label>
+            <button id="checkboxButton">Wykonaj</button>
+        </div>
+        <div id="textField" class="column">
+            <textarea id="textInput" rows="4" cols="50"></textarea>
+            <button id="textButton">Wykonaj</button>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function() {
+            $('#basicButton').click(function() {
+                $.get('/basic', function(data) {
+                    $('#responseField').html(JSON.stringify(data, null, 2));
+                });
+            });
+
+            $('#checkboxButton').click(function() {
+                var selected = [];
+                $('input[name="field"]:checked').each(function() {
+                    selected.push($(this).val());
+                });
+                $.ajax({
+                    url: '/select',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({ selected: selected }),
+                    success: function(data) {
+                        $('#responseField').html(JSON.stringify(data, null, 2));
+                    }
+                });
+            });
+
+            $('#textButton').click(function() {
+                var text = $('#textInput').val();
+                $.ajax({
+                    url: '/math',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({ text: text }),
+                    success: function(data) {
+                        $('#responseField').html(JSON.stringify(data, null, 2));
+                    }
+                });
+            });
+
+            $('#newButton').click(function() {
+                var size = $('#sizeInput').val();
+                $.ajax({
+                    url: '/new',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({ size: size }),
+                    success: function(data) {
+                        $('#responseField').text(JSON.stringify(data, null, 2));
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
