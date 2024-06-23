@@ -27,21 +27,22 @@ Raport na 1k,10k,100k wygenerowanych jsonow.
 Struktura katalogów jest przygotowana do uruchomienia poprzez "docker-compose up --build".
 Po uruchomieniu, należy wejść na adres podawany przez "Serwis3" (http://localhost:5003).
 Na stronie wybieramy intersującą nas opcje:
-- Pole do wprowadzenia ilość jsonów znajduje się na samej górze.
-- Przycisk zatwierdzający wybór "new".
+- Pole do wprowadzenia ilość jsonów znajduje się na samej górze oraz przycisk zatwierdzający wybór "new".
 - Przycisk wykonujący zapytanie o podstawowe wartości jsonów "Basic".
 - Chceckboxy do wyboru własnych wartości oraz przycisk zatwierdzający wybór.
 - Pole tekstowe do wprowadzania prostych obliczeń matematycznych rozdzielonych przecinkiem oraz przycisk zatwierdzający wybór.
 
+Raporty dostępne są pod enpointem "/report". Wykres dla zużycia procesora oraz pamięci i tabelka dla czasu wykonania zapytań dla serwisów nr. 1 oraz nr. 2.
+
 >>> Technologie
 
-Python 3.10.5;
-Flask 3.0.3;
-Flask-CSV 1.2.1;
-Requests 2.32.2;
-psutil 5.9.8;
+- Python 3.10.5
+- Flask 3.0.3
+- Flask-CSV 1.2.1
+- Requests 2.32.2
+- psutil 5.9.8
 
-Docker 26.1.4;
-Docker Compose 2.27.1;
+- Docker 26.1.4
+- Docker Compose 2.27.1
 
 
