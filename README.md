@@ -22,6 +22,17 @@ Raport powinien zawierać informacje takie jak użycie procesora,pamięci w czas
 poprzednich serwisów oraz czas zapytań http pomiędzy serwisami 3->2->1.
 Raport na 1k,10k,100k wygenerowanych jsonow.
 
+>>> Start
+
+Struktura katalogów jest przygotowana do uruchomienia poprzez "docker-compose up --build".
+Po uruchomieniu, należy wejść na adres podawany przez "Serwis3" (http://localhost:5003).
+Na stronie wybieramy intersującą nas opcje:
+- Pole do wprowadzenia ilość jsonów znajduje się na samej górze.
+- Przycisk zatwierdzający wybór "new".
+- Przycisk wykonujący zapytanie o podstawowe wartości jsonów "Basic".
+- Chceckboxy do wyboru własnych wartości oraz przycisk zatwierdzający wybór.
+- Pole tekstowe do wprowadzania prostych obliczeń matematycznych rozdzielonych przecinkiem oraz przycisk zatwierdzający wybór.
+
 >>> Technologie
 
 Python 3.10.5;
